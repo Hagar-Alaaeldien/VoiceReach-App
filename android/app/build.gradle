@@ -1,0 +1,60 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services' // Google Services plugin for Firebase
+}
+
+android {
+    namespace = "com.example.voicereach_app"
+    compileSdk = 34
+    ndkVersion = 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true // Enable desugaring
+
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+
+    defaultConfig {
+        // Specify your own unique Application ID
+        applicationId = "com.example.voicereach_app"
+        // Flutter configuration
+        minSdk = 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // Signing config for the release build
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    // Import the Firebase BoM (Bill of Materials) to manage versions automatically
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+
+    // Add Firebase Analytics as a starting point
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Add other Firebase products here if needed in the future
+    // Example: implementation 'com.google.firebase:firebase-auth'
+    // Example: implementation 'com.google.firebase:firebase-firestore'
+    // Add this for core library desugaring
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+
+}
